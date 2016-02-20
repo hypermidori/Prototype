@@ -27,7 +27,7 @@ PlayerStatusManager._initPlayerStatus = function() {
 
 	status.hp = actor.hp;
 	status.maxHp = actor.mhp;
-	status.sp = 0;
+	status.sp = actor.mmp;
 	status.maxSp = actor.mmp;
 
 	status.atk = actor.atk;
