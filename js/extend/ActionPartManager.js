@@ -10,7 +10,6 @@ ActionPartManager.isActionPart = false;
 ActionPartManager.spGainCount = 0;
 ActionPartManager.passedDungeonMaps = {}; // pretend unique_array
 
-
 ActionPartManager.start = function() {
 	if (PlayerStatusManager.getPlayerStatus() === null) {
 		PlayerStatusManager.init();
@@ -91,15 +90,28 @@ ActionPartManager.processInputKey = function() {
 	// step key
 	if (ActionPartInput.isPressed(ActionPartInput.KEY_SHIFT)) {
 		if (
-			ActionPartInput.isKeyDown(ActionPartInput.KEY_UP) ||
-			ActionPartInput.isKeyDown(ActionPartInput.KEY_DOWN) ||
-			ActionPartInput.isKeyDown(ActionPartInput.KEY_LEFT) ||
-			ActionPartInput.isKeyDown(ActionPartInput.KEY_RIGHT)
+			keyCheckFunc(ActionPartInput.KEY_UP) ||
+			keyCheckFunc(ActionPartInput.KEY_DOWN) ||
+			keyCheckFunc(ActionPartInput.KEY_LEFT) ||
+			keyCheckFunc(ActionPartInput.KEY_RIGHT)
 		) {
 			PlayerAction.step();
 			return;
 		}
 	}
+	// step arrowkey start
+	if (
+		ActionPartInput.isPressed(ActionPartInput.KEY_UP) ||
+		ActionPartInput.isPressed(ActionPartInput.KEY_DOWN) ||
+		ActionPartInput.isPressed(ActionPartInput.KEY_LEFT) ||
+		ActionPartInput.isPressed(ActionPartInput.KEY_RIGHT)
+	) {
+		if(ActionPartInput.isKeyDown(ActionPartInput.KEY_SHIFT)){
+			PlayerAction.step();
+			return;
+		}
+	}
+
 };
 
 ActionPartManager.autoSpGain = function() {
