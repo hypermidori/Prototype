@@ -17,7 +17,7 @@ EnemyEventCollision.prototype.setEnemyEventPrefix = function(prefix) {
 EnemyEventCollision.prototype.updateEnemyEventList = function() {
 	this.enemyEventList = [];
 	$gameMap._events.forEach(function(event) {
-		if (event._erased) {
+		if ($gameSelfSwitches.value([$gameMap.mapId(), event.eventId(), "D"])) {
 			return; // 消去済みのエネミーは最初で弾く
 		}
 

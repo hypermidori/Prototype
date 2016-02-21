@@ -46,7 +46,7 @@ EnemyStatusManager.destroyEnemy = function(enemy) {
 		.addWait(10)
 		.addTask(function() {
 			$gameSelfSwitches.setValue([$gameMap.mapId(), enemy.eventId(), "D"], true); // destroy flag
-			$gameMap.eraseEvent(enemy.eventId());
+//			$gameMap.eraseEvent(enemy.eventId());
 		}.bind(this));
 
 	FrameTaskExecuter.execTask(taskList);
