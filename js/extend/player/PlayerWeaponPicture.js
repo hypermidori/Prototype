@@ -24,15 +24,14 @@ PlayerWeaponPictureManager.update = function() {
 		1, dispPictureName, 0, pictureX, pictureY, 100, 100, 255, 0);
 };
 
-PlayerWeaponPictureManager.setPrefix = function(fileId) {
-	PlayerWeaponPictureManager.fileId = fileId;
+PlayerWeaponPictureManager.setPrefix = function(prefix) {
+	PlayerWeaponPictureManager.prefix = prefix;
 };
 
 PlayerWeaponPictureManager.setFileId = function(num) {
 	var idNum = ("000" + num).substr(-4);
 	var direction = PlayerWeaponPictureManager._getPlayerDirection();
 	PlayerWeaponPictureManager._setFileId("" + direction + "_" + idNum);
-//	PlayerWeaponPictureManager._setFileId("" + 3 + "_" + idNum);	// TODO delete
 };
 
 PlayerWeaponPictureManager._setFileId = function(fileId) {
