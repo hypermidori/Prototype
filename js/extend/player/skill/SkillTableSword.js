@@ -13,6 +13,7 @@ SkillTableSword.get = function(key) {
 	switch (key) {
 		case "s:sword":
 			table = {
+				weaponPicturePrefix:"sword/sword1/sword1_",
 				normal: {sp:0, func:SkillSword.normalAttack},
 				skill_1: {sp:20, func:SkillSword.powerAttack_3},
 				skill_2: {sp:15, func:SkillSword.powerAttack_2},
@@ -22,6 +23,7 @@ SkillTableSword.get = function(key) {
 
 		default:
 			table = {
+				weaponPicturePrefix:"sword/sword1/sword1_",
 				normal: {sp:0, func:SkillSword.normalAttack},
 				skill_1: {sp:20, func:SkillSword.powerAttack_3},
 				skill_2: {sp:15, func:SkillSword.powerAttack_2},

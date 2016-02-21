@@ -51,6 +51,8 @@ PlayerAction.init = function() {
 	if (skill.skill_1) PlayerAction.skillMap.skill_1 = skill.skill_1;
 	if (skill.skill_2) PlayerAction.skillMap.skill_2 = skill.skill_2;
 	if (skill.skill_3) PlayerAction.skillMap.skill_3 = skill.skill_3;
+
+	PlayerWeaponPictureManager.setPrefix(skill.weaponPicturePrefix);
 };
 
 PlayerAction.reset = function() {

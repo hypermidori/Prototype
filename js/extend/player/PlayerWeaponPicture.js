@@ -6,7 +6,7 @@ function PlayerWeaponPictureManager() {
 	throw new Error('This is a static class');
 }
 
-PlayerWeaponPictureManager.prefix = "sword/sword1/sword1_";
+PlayerWeaponPictureManager.prefix = "";
 PlayerWeaponPictureManager.fileId = "";
 PlayerWeaponPictureManager.isDisp = false;
 
