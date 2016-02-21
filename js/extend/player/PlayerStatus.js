@@ -57,7 +57,6 @@ PlayerStatusManager._getWaponSkill = function(actor) {
 	return skill;
 };
 
-
 PlayerStatusManager.processPlayerDamage = function(enemy) {
 	var enemyStatus = EnemyStatusManager.getEnemyStatus(enemy);
 	var damage = DamageCalculator.calcAttackDamage(enemyStatus, this.playerStatus, 1);

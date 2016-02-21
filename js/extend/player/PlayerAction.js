@@ -54,14 +54,14 @@ PlayerAction.init = function() {
 };
 
 PlayerAction.reset = function() {
+	PlayerAction.executingAttackTask = null;
 	PlayerAction.setNormalAttackNum(0);
 	PlayerAction.setCancelLevel(0);
 	PlayerAction.moveReset();
 	PlayerAction.isStopping = false;
 	PlayerAction.isCancelable = false;
-	PlayerAction.executingAttackTask = null;
-
 	PlayerStatusManager.getPlayerStatus().isAttacking = false;
+	PlayerWeaponPictureManager.erase();
 };
 
 PlayerAction.prepareAttack = function() {
@@ -75,6 +75,7 @@ PlayerAction.prepareAttack = function() {
 	PlayerAction.isStopping = false;
 	PlayerAction.isCancelable = false;
 	PlayerStatusManager.getPlayerStatus().isAttacking = true;
+	PlayerWeaponPictureManager.erase();
 };
 
 PlayerAction.normalAttack = function() {
