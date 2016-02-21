@@ -62,7 +62,10 @@ PlayerAction.reset = function() {
 	PlayerAction.moveReset();
 	PlayerAction.isStopping = false;
 	PlayerAction.isCancelable = false;
-	PlayerStatusManager.getPlayerStatus().isAttacking = false;
+	// TODO PlayerStatusManager.getPlayerStatus().isAttacking move PlayerAction
+	if(PlayerStatusManager.getPlayerStatus()){
+		PlayerStatusManager.getPlayerStatus().isAttacking = false;
+	}
 	PlayerWeaponPictureManager.erase();
 };
 

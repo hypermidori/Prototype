@@ -25,6 +25,7 @@ ActionPartManager.start = function() {
 };
 
 ActionPartManager.stop = function() {
+	PlayerAction.reset();
 	ActionPartManager.isActionPart = false;
 	PlayerStatusManager.setPlayerStatus(null);
 
@@ -36,8 +37,8 @@ ActionPartManager.stop = function() {
 			$gameSelfSwitches.setValue(key); //delete selfSwitch
 		});
 	});
-	ActionPartManager.passedDungeonMaps[$gameMap.mapId()] = true;
-
+	ActionPartManager.passedDungeonMaps = {};
+	FrameTaskExecuter.interrupt();
 };
 
 // ActionPart main loop
