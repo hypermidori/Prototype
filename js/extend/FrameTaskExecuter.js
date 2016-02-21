@@ -34,6 +34,12 @@ FrameTaskExecuter.execTask = function(taskList) {
 	FrameTaskExecuter.taskLists.push(taskList);
 };
 
+// all tasks interrupt
+FrameTaskExecuter.interrupt = function(){
+	FrameTaskExecuter.taskLists.forEach(function(task) {
+		task.interrupt();
+	});
+};
 
 //------------------------------------------------------------------
 function FrameTaskList() {
