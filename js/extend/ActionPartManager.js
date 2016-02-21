@@ -53,10 +53,8 @@ ActionPartManager.update = function() {
 	ActionPartInput.updateKeyState();
 	ActionPartManager.processInputKey();
 
-	// Draw weapon TODO
+	// Draw weapon
 	PlayerWeaponPictureManager.update();
-//	$gameScreen.showPicture(
-//		1, "sword/testpic", 0, $gamePlayer.screenX() - 96 + 25, $gamePlayer.screenY() - 96, 100, 100, 255, 0);
 };
 
 ActionPartManager.processInputKey = function() {
