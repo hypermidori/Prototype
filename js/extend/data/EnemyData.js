@@ -11,7 +11,13 @@ EnemyData.enemyList = {
 	"master": {
 		name: "master",
 		hp: 100,
-		atk: 30,
+		atk: 40,
+		def: 30,
+	},
+	"slime": {
+		name: "slime",
+		hp: 50,
+		atk: 40,
 		def: 30,
 	},
 	"hyperMaster": {
@@ -21,14 +27,6 @@ EnemyData.enemyList = {
 		def: 10,
 		disableBlowOff: true
 	},
-	"eventMaster": {
-		name: "hyperMaster",
-		hp: 30,
-		atk: 10,
-		def: 10,
-		selfSwitch: "D"
-	},
-
 	"default": {
 		name: "default",
 		hp: 30,
