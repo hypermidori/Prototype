@@ -20,12 +20,12 @@ EnemyData.enemyList = {
 		atk: 40,
 		def: 30,
 	},
-	"hyperMaster": {
-		name: "hyperMaster",
-		hp: 30,
-		atk: 10,
-		def: 10,
-		disableBlowOff: true
+	"minotaurus": {
+		name: "minotaurus",
+		hp: 200,
+		atk: 60,
+		def: 30,
+		superarmer:true
 	},
 	"default": {
 		name: "default",

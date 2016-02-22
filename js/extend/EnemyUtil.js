@@ -40,6 +40,8 @@ EnemyUtil._makeBlowOffRouteList = function(enemy, moveDistance, route) {
 };
 
 EnemyUtil.blowOffTop = function(enemy, moveDistance) {
+	console.log(EnemyStatusManager.getEnemyStatus(enemy));
+	if(EnemyStatusManager.getEnemyStatus(enemy).superarmer) return;
 	var list = EnemyUtil._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_UP);
 
 	var enemyMoveRoute = {
@@ -52,6 +54,7 @@ EnemyUtil.blowOffTop = function(enemy, moveDistance) {
 };
 
 EnemyUtil.blowOffBottom = function(enemy, moveDistance) {
+	if(EnemyStatusManager.getEnemyStatus(enemy).superarmer) return;
 	var list = EnemyUtil._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_DOWN);
 
 	var enemyMoveRoute = {
@@ -64,6 +67,7 @@ EnemyUtil.blowOffBottom = function(enemy, moveDistance) {
 };
 
 EnemyUtil.blowOffLeft = function(enemy, moveDistance) {
+	if(EnemyStatusManager.getEnemyStatus(enemy).superarmer) return;
 	var list = EnemyUtil._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_LEFT);
 
 	var enemyMoveRoute = {
@@ -76,6 +80,7 @@ EnemyUtil.blowOffLeft = function(enemy, moveDistance) {
 };
 
 EnemyUtil.blowOffRight = function(enemy, moveDistance) {
+	if(EnemyStatusManager.getEnemyStatus(enemy).superarmer) return;
 	var list = EnemyUtil._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_RIGHT);
 
 	var enemyMoveRoute = {
@@ -87,19 +92,8 @@ EnemyUtil.blowOffRight = function(enemy, moveDistance) {
 	enemy.forceMoveRoute(enemyMoveRoute);
 };
 
-EnemyUtil.blowOffTop = function(enemy, moveDistance) {
-	var list = EnemyUtil._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_UP);
-
-	var enemyMoveRoute = {
-		"list": list,
-		"repeat": false,
-		"skippable": true,
-		"wait": true
-	};
-	enemy.forceMoveRoute(enemyMoveRoute);
-};
-
 EnemyUtil.knockStop = function(enemy, stopFrame) {
+	if(EnemyStatusManager.getEnemyStatus(enemy).superarmer) return;
 
 	var list = [];
 	var param = [];
