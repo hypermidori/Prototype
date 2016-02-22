@@ -40,7 +40,6 @@ EnemyUtil._makeBlowOffRouteList = function(enemy, moveDistance, route) {
 };
 
 EnemyUtil.blowOffTop = function(enemy, moveDistance) {
-	console.log(EnemyStatusManager.getEnemyStatus(enemy));
 	if(EnemyStatusManager.getEnemyStatus(enemy).superarmer) return;
 	var list = EnemyUtil._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_UP);
 
