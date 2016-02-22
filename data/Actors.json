@@ -1,6 +1,6 @@
 [
 null,
-{"id":1,"battlerName":"","characterIndex":0,"characterName":"wig","classId":5,"equips":[1,1,2,3,0],"faceIndex":4,"faceName":"wig","traits":[],"initialLevel":1,"maxLevel":99,"name":"ウィグ","nickname":"冒険者","note":"","profile":""},
+{"id":1,"battlerName":"","characterIndex":0,"characterName":"wig","classId":5,"equips":[1,1,2,3,0],"faceIndex":4,"faceName":"wig","traits":[],"initialLevel":1,"maxLevel":99,"name":"主人公","nickname":"冒険者","note":"","profile":""},
 {"id":2,"battlerName":"altes","characterIndex":0,"characterName":"altes","classId":2,"equips":[2,1,2,3,0],"faceIndex":0,"faceName":"altes","traits":[],"initialLevel":1,"maxLevel":99,"name":"アルテス","nickname":"","note":"","profile":""},
 {"id":3,"battlerName":"Actor3_8","characterIndex":7,"characterName":"Actor3","classId":3,"equips":[3,0,2,3,4],"faceIndex":7,"faceName":"Actor3","traits":[],"initialLevel":1,"maxLevel":99,"name":"マーシャ","nickname":"","note":"","profile":""},
 {"id":4,"battlerName":"Actor2_7","characterIndex":6,"characterName":"Actor2","classId":4,"equips":[4,0,2,3,4],"faceIndex":6,"faceName":"Actor2","traits":[],"initialLevel":1,"maxLevel":99,"name":"ルキウス","nickname":"","note":"","profile":""}

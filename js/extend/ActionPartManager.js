@@ -29,6 +29,11 @@ ActionPartManager.stop = function() {
 	ActionPartManager.isActionPart = false;
 	PlayerStatusManager.setPlayerStatus(null);
 
+	// delete stage switch
+	for(var i = 101; i <= 200; i++) {
+		$gameSwitches.setValue(i, false);
+	}
+
 	// delete enemy selfSwitch
 	Object.keys(ActionPartManager.passedDungeonMaps).forEach(function(mapId) {
 		var switchKeys = $gameSelfSwitches.getKeysWithMapId(mapId);
