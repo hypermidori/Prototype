@@ -163,7 +163,9 @@ ActionPartManager.autoSpGain = function() {
 	Game_SelfSwitches.prototype.getKeysWithMapId = function(mapId) {
 		keys = Object.keys(this._data);
 		var result = keys.filter(function(key) {
-			return key[0] == mapId;
+			keyMapId = key.split(",")[0];
+
+			return keyMapId == mapId;
 		});
 
 		return result;

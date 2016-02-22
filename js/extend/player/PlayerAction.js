@@ -88,7 +88,7 @@ PlayerAction.normalAttack = function() {
 		if (!PlayerAction.isCancelable) {
 			return;
 		}
-		if (PlayerAction.cancelLevel > 0) {
+		if (PlayerAction.cancelLevel > 5) {
 			return;
 		}
 	}
@@ -165,6 +165,7 @@ PlayerAction.step = function() {
 	}
 	PlayerAction.prepareAttack();
 
+	PlayerAction.setCancelLevel(1);
 	var moveDirection = 0;
 	if (ActionPartInput.isPressed(ActionPartInput.KEY_UP)) moveDirection = Game_Character.ROUTE_MOVE_UP;
 	if (ActionPartInput.isPressed(ActionPartInput.KEY_DOWN)) moveDirection = Game_Character.ROUTE_MOVE_DOWN;

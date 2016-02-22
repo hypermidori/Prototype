@@ -27,6 +27,7 @@ SkillSword.normalAttack1 = function() {
 	var tasks = new FrameTaskList();
 	var collisionRect = new CollisionRectangle(-1, 1, -2, 0);
 	PlayerAction._rotateCollisionRectangle(collisionRect);
+	PlayerAction.setCancelLevel(0);
 	PlayerAction.setNormalAttackNum(1);
 
 	tasks.addTask(function() {
@@ -72,6 +73,7 @@ SkillSword.normalAttack2 = function() {
 	var tasks = new FrameTaskList();
 	var collisionRect = new CollisionRectangle(-1, 1, -2, 0);
 	PlayerAction._rotateCollisionRectangle(collisionRect);
+	PlayerAction.setCancelLevel(0);
 	PlayerAction.setNormalAttackNum(2);
 
 	tasks.addTask(function() {
@@ -117,6 +119,7 @@ SkillSword.normalAttack3 = function() {
 	var tasks = new FrameTaskList();
 	var collisionRect = new CollisionRectangle(-1, 1, -2, 0);
 	PlayerAction._rotateCollisionRectangle(collisionRect);
+	PlayerAction.setCancelLevel(0);
 	PlayerAction.setNormalAttackNum(3);
 
 	tasks.addTask(function() {
@@ -162,7 +165,7 @@ SkillSword.normalAttack4 = function() {
 	var tasks = new FrameTaskList();
 	var collisionRect = new CollisionRectangle(-1, 1, -2, 0);
 	PlayerAction._rotateCollisionRectangle(collisionRect);
-	PlayerAction.setCancelLevel(1);
+	PlayerAction.setCancelLevel(6);
 	PlayerAction.setNormalAttackNum(0); // end
 
 	tasks.addTask(function() {
@@ -293,7 +296,7 @@ SkillSword.powerAttack_2 = function() {
 	var collisionRect = new CollisionRectangle(-1, 1, -3, 0);
 	PlayerAction._rotateCollisionRectangle(collisionRect);
 	PlayerAction.setCancelLevel(0);
-	PlayerAction.setNormalAttackNum(0); // end
+	PlayerAction.setNormalAttackNum(0);
 
 	tasks.addTask(function() {
 			PlayerAction.forwardAndStop(3, 9999, 6);
@@ -331,7 +334,8 @@ SkillSword.powerAttack_3 = function() {
 	var tasks = new FrameTaskList();
 	var collisionRect = new CollisionRectangle(-1, 1, -3, 0);
 	PlayerAction._rotateCollisionRectangle(collisionRect);
-	PlayerAction.setCancelLevel(1);
+	PlayerAction.setCancelLevel(0);
+	PlayerAction.setNormalAttackNum(0); // end
 
 	tasks.addTask(function() {
 			PlayerAction.knockStop(9999);
