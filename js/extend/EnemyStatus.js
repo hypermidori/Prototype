@@ -81,7 +81,5 @@ function EnemyStatus(enemy) {
 	this.atk = enemyStatusOrigin.atk;
 	this.def = enemyStatusOrigin.def;
 	this.superarmer = enemyStatusOrigin.superarmer;
-
-	this.disableBlowOff = enemyStatusOrigin.disableBlowOff;
-	this.selfSwitch = enemyStatusOrigin.selfSwitch;
+	this.touchdamage = enemyStatusOrigin.touchdamage;
 }

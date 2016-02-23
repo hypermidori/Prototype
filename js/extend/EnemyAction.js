@@ -127,6 +127,11 @@ EnemyAction.doEnemyAttack = function(interpreter) {
 	}
 
 	var enemy = $gameMap.event(interpreter._eventId);
+
+	// judge touchdamage
+	var status = EnemyStatusManager.getEnemyStatus(enemy);
+	if(!status.touchdamage) return;
+
 	var taskList = new FrameTaskList();
 
 	taskList.addTask(function() {
