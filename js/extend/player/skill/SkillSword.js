@@ -234,7 +234,7 @@ SkillSword.powerAttack_1 = function() {
 
 			hitEnemyList.forEach(function(enemy) {
 				enemy.requestAnimation(126);
-				EnemyUtil.knockStop(enemy, 20);
+				EnemyAction.knockStop(enemy, 20);
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
@@ -245,7 +245,7 @@ SkillSword.powerAttack_1 = function() {
 
 			hitEnemyList.forEach(function(enemy) {
 				enemy.requestAnimation(126);
-				EnemyUtil.knockStop(enemy, 20);
+				EnemyAction.knockStop(enemy, 20);
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
@@ -256,7 +256,7 @@ SkillSword.powerAttack_1 = function() {
 
 			hitEnemyList.forEach(function(enemy) {
 				enemy.requestAnimation(126);
-				EnemyUtil.knockStop(enemy, 20);
+				EnemyAction.knockStop(enemy, 20);
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
@@ -267,7 +267,7 @@ SkillSword.powerAttack_1 = function() {
 
 			hitEnemyList.forEach(function(enemy) {
 				enemy.requestAnimation(126);
-				EnemyUtil.knockStop(enemy, 20);
+				EnemyAction.knockStop(enemy, 20);
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
@@ -358,7 +358,7 @@ SkillSword.powerAttack_3 = function() {
 
 			hitEnemyList.forEach(function(enemy) {
 				enemy.requestAnimation(126);
-				EnemyUtil.knockStop(enemy, 12);
+				EnemyAction.knockStop(enemy, 12);
 				EnemyStatusManager.processEnemyDamange(enemy, 0.5);
 			}.bind(this));
 		})
@@ -375,7 +375,7 @@ SkillSword.powerAttack_3 = function() {
 
 			hitEnemyList.forEach(function(enemy) {
 				enemy.requestAnimation(126);
-				EnemyUtil.knockStop(enemy, 20);
+				EnemyAction.knockStop(enemy, 20);
 				EnemyStatusManager.processEnemyDamange(enemy, 0.5);
 			}.bind(this));
 		})

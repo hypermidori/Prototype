@@ -242,16 +242,16 @@ PlayerAction._blowOffEnemy = function(enemy, moveDistance) {
 	var playerDirection = PlayerAction._getPlayerDirection();
 	switch (playerDirection) {
 		case PlayerAction.DIRECTION_TOP:
-			EnemyUtil.blowOffTop(enemy, moveDistance);
+			EnemyAction.blowOffTop(enemy, moveDistance);
 			break;
 		case PlayerAction.DIRECTION_LEFT:
-			EnemyUtil.blowOffLeft(enemy, moveDistance);
+			EnemyAction.blowOffLeft(enemy, moveDistance);
 			break;
 		case PlayerAction.DIRECTION_BOTTOM:
-			EnemyUtil.blowOffBottom(enemy, moveDistance);
+			EnemyAction.blowOffBottom(enemy, moveDistance);
 			break;
 		case PlayerAction.DIRECTION_RIGHT:
-			EnemyUtil.blowOffRight(enemy, moveDistance);
+			EnemyAction.blowOffRight(enemy, moveDistance);
 			break;
 	}
 
