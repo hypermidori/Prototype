@@ -115,6 +115,11 @@ EnemyAction.knockStop = function(enemy, stopFrame) {
 	enemy.forceMoveRoute(enemyMoveRoute);
 };
 
+EnemyAction.wakeUpEnemy = function(interpreter) {
+	var enemy = $gameMap.event(interpreter._eventId);
+	EnemyStatusManager.initEnemy(enemy);
+};
+
 EnemyAction.doEnemyAttack = function(interpreter) {
 	// TODO evil. make ACTInputManager
 	if (Input._latestButton === "ok" && Input._pressedTime === 1) {

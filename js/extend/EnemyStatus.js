@@ -12,15 +12,27 @@ EnemyStatusManager.init = function() {
 	EnemyStatusManager._list = {};
 };
 
-EnemyStatusManager.getEnemyStatus = function(enemy) {
+EnemyStatusManager.initEnemy = function(enemy) {
+	// enemy init and add EnemyList
 	var status = EnemyStatusManager._list[enemy._eventId];
 	if (!status) {
-		// first read # TODO evil
 		var newStatus = new EnemyStatus(enemy);
 		EnemyStatusManager._list[enemy._eventId] = newStatus;
 
 		status = newStatus;
 	}
+
+	return status;
+};
+
+EnemyStatusManager.getEnemyStatus = function(enemy) {
+	var status = EnemyStatusManager._list[enemy._eventId];
+	// if (!status) {
+	// 	var newStatus = new EnemyStatus(enemy);
+	// 	EnemyStatusManager._list[enemy._eventId] = newStatus;
+	//
+	// 	status = newStatus;
+	// }
 
 	return status;
 };

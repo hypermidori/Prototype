@@ -11,15 +11,26 @@ ActionPartManager.spGainCount = 0;
 ActionPartManager.passedDungeonMaps = {}; // pretend unique_array
 
 ActionPartManager.start = function() {
+	// status manager init
 	if (PlayerStatusManager.getPlayerStatus() === null) {
 		PlayerStatusManager.init();
 	}
 	EnemyStatusManager.init();
 
+	// gauge init
 	var gauge = new Window_Gauge();
 	StatusGaugeManager.drawStart(gauge);
+
+	// playerAction init
 	PlayerAction.init();
 
+	// delete enemy wakeup selfSwitch
+	var switchKeys = $gameSelfSwitches.getKeysWithMapIdAndSwitchId($gameMap.mapId(), "C");
+	switchKeys.forEach(function(key) {
+		$gameSelfSwitches.setValue(key); 	//delete selfSwitch
+	});
+
+	// ActionPartManager init
 	ActionPartManager.passedDungeonMaps[$gameMap.mapId()] = true;
 	ActionPartManager.isActionPart = true;
 };
@@ -166,6 +177,18 @@ ActionPartManager.autoSpGain = function() {
 			keyMapId = key.split(",")[0];
 
 			return keyMapId == mapId;
+		});
+
+		return result;
+	};
+
+	Game_SelfSwitches.prototype.getKeysWithMapIdAndSwitchId = function(mapId, switchId) {
+		keys = Object.keys(this._data);
+		var result = keys.filter(function(key) {
+			keyMapId = key.split(",")[0];
+			keySwitchId = key.split(",")[2];
+
+			return keyMapId == mapId && keySwitchId == switchId;
 		});
 
 		return result;
