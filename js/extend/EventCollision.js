@@ -1,20 +1,21 @@
 //=============================================================================
-// EnemyEventCollision.js
+// PlayerAttackCollision.js
 //=============================================================================
 
-function EnemyEventCollision() {
+function PlayerAttackCollision() {
+	// TODO change to static class
 	this.enemyEventList = [];
 	this.enemyEventPrefix = "e:";
 }
 
 // 敵イベント判定用プレフィクスset
-EnemyEventCollision.prototype.setEnemyEventPrefix = function(prefix) {
+PlayerAttackCollision.prototype.setEnemyEventPrefix = function(prefix) {
 	this.enemyEventPrefix = prefix;
 };
 
 
 // マップ上のエネミーイベント抽出
-EnemyEventCollision.prototype.updateEnemyEventList = function() {
+PlayerAttackCollision.prototype.updateEnemyEventList = function() {
 	this.enemyEventList = [];
 	$gameMap._events.forEach(function(event) {
 		if ($gameSelfSwitches.value([$gameMap.mapId(), event.eventId(), "D"])) {
@@ -28,28 +29,15 @@ EnemyEventCollision.prototype.updateEnemyEventList = function() {
 	}.bind(this));
 };
 
-EnemyEventCollision.prototype.judgeCollision = function(rect) {
-	return this._judgeCollision(rect.left, rect.right, rect.top, rect.bottom);
+PlayerAttackCollision.prototype.judgeCollision = function(rect) {
+	return this._judgeCollision(rect);
 };
 
-// プレイヤー位置を基準点として当たり判定
-EnemyEventCollision.prototype._judgeCollision = function(left, right, top, bottom) {
+PlayerAttackCollision.prototype._judgeCollision = function(rect) {
 	var hitEnemyList = [];
 
-	var hitLeft = $gamePlayer._realX + left;
-	var hitRight = $gamePlayer._realX + right;
-	var hitTop = $gamePlayer._realY + top;
-	var hitBottom = $gamePlayer._realY + bottom;
-
 	this.enemyEventList.forEach(function(event) {
-
-		var isHit = true;
-		if (event._realX < hitLeft || event._realX > hitRight) {
-			isHit = false;
-		}
-		if (event._realY < hitTop || event._realY > hitBottom) {
-			isHit = false;
-		}
+		var isHit = rect.judge($gamePlayer, event);
 
 		if (isHit) {
 			hitEnemyList.push(event);
@@ -60,6 +48,28 @@ EnemyEventCollision.prototype._judgeCollision = function(left, right, top, botto
 	return hitEnemyList;
 };
 
+function EnemyAttackColision(){
+	throw new Error('This is a static class');
+}
+
+/**
+ * [function description]
+ * @param  {Game_CharacterBase} enemy
+ * @param  {CollisionRectangle} rect
+ * @return {boolean} judge result
+ */
+EnemyAttackColision.judgeCollision = function(enemy, rect) {
+	return rect.judge(enemy, $gamePlayer);
+};
+
+/**
+ * [CollisionRectangle description]
+ * @constructor
+ * @param {Number} left
+ * @param {Number} right
+ * @param {Number} top
+ * @param {Number} bottom
+ */
 function CollisionRectangle(left, right, top, bottom) {
 	this.left = left;
 	this.right = right;
@@ -67,6 +77,10 @@ function CollisionRectangle(left, right, top, bottom) {
 	this.bottom = bottom;
 }
 
+/**
+ * [function description]
+ * @return {CollisionRectangle} rotate rectangle
+ */
 CollisionRectangle.prototype.rotateLeft = function() {
 	var orig = new CollisionRectangle(this.left, this.right, this.top, this.bottom);
 
@@ -78,5 +92,29 @@ CollisionRectangle.prototype.rotateLeft = function() {
 	return this;
 };
 
+/**
+ * [function description]
+ * @param  {Game_CharacterBase} attacker
+ * @param  {Game_CharacterBase} defender
+ * @return {boolean} judge result
+ */
+CollisionRectangle.prototype.judge = function(attacker, defender) {
+	var rect = this;
 
-$enemyEventCollision = new EnemyEventCollision();
+	var hitLeft = attacker._realX + rect.left;
+	var hitRight = attacker._realX + rect.right;
+	var hitTop = attacker._realY + rect.top;
+	var hitBottom = attacker._realY + rect.bottom;
+
+	var isHit = true;
+	if (defender._realX < hitLeft || defender._realX > hitRight) {
+		isHit = false;
+	}
+	if (defender._realY < hitTop || defender._realY > hitBottom) {
+		isHit = false;
+	}
+
+	return isHit;
+};
+
+$enemyEventCollision = new PlayerAttackCollision();
