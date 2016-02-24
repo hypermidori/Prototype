@@ -65,7 +65,10 @@ PlayerStatusManager.processPlayerDamage = function(enemy) {
 
 	// death TODO rewrite
 	if (this.playerStatus.hp <= 0) {
-		SceneManager.goto(Scene_Gameover);
+		if(!ActionPartManager.isGameOver){		// break gameovering
+			ActionPartManager.isGameOver = true;
+			SceneManager.goto(Scene_Gameover);
+		}
 	}
 };
 

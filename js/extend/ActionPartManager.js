@@ -9,8 +9,12 @@ function ActionPartManager() {
 ActionPartManager.isActionPart = false;
 ActionPartManager.spGainCount = 0;
 ActionPartManager.passedDungeonMaps = {}; // pretend unique_array
+ActionPartManager.isGameOver = false;
 
 ActionPartManager.start = function() {
+	// GameOverFlg reset
+	ActionPartManager.isGameOver = false;
+
 	// status manager init
 	if (PlayerStatusManager.getPlayerStatus() === null) {
 		PlayerStatusManager.init();

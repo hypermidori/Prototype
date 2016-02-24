@@ -40,7 +40,12 @@ EnemyAction._makeBlowOffRouteList = function(enemy, moveDistance, route) {
 };
 
 EnemyAction.blowOffTop = function(enemy, moveDistance) {
-	if(EnemyStatusManager.getEnemyStatus(enemy).superarmer) return;
+	var status = EnemyStatusManager.getEnemyStatus(enemy);
+	if(status.superarmor) return;
+	if(status.executingAttackTask) {
+		status.executingAttackTask.interrupt();
+	}
+
 	var list = EnemyAction._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_UP);
 
 	var enemyMoveRoute = {
@@ -53,7 +58,12 @@ EnemyAction.blowOffTop = function(enemy, moveDistance) {
 };
 
 EnemyAction.blowOffBottom = function(enemy, moveDistance) {
-	if(EnemyStatusManager.getEnemyStatus(enemy).superarmer) return;
+	var status = EnemyStatusManager.getEnemyStatus(enemy);
+	if(status.superarmor) return;
+	if(status.executingAttackTask) {
+		status.executingAttackTask.interrupt();
+	}
+
 	var list = EnemyAction._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_DOWN);
 
 	var enemyMoveRoute = {
@@ -66,7 +76,12 @@ EnemyAction.blowOffBottom = function(enemy, moveDistance) {
 };
 
 EnemyAction.blowOffLeft = function(enemy, moveDistance) {
-	if(EnemyStatusManager.getEnemyStatus(enemy).superarmer) return;
+	var status = EnemyStatusManager.getEnemyStatus(enemy);
+	if(status.superarmor) return;
+	if(status.executingAttackTask) {
+		status.executingAttackTask.interrupt();
+	}
+
 	var list = EnemyAction._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_LEFT);
 
 	var enemyMoveRoute = {
@@ -79,7 +94,12 @@ EnemyAction.blowOffLeft = function(enemy, moveDistance) {
 };
 
 EnemyAction.blowOffRight = function(enemy, moveDistance) {
-	if(EnemyStatusManager.getEnemyStatus(enemy).superarmer) return;
+	var status = EnemyStatusManager.getEnemyStatus(enemy);
+	if(status.superarmor) return;
+	if(status.executingAttackTask) {
+		status.executingAttackTask.interrupt();
+	}
+
 	var list = EnemyAction._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_RIGHT);
 
 	var enemyMoveRoute = {
@@ -92,8 +112,16 @@ EnemyAction.blowOffRight = function(enemy, moveDistance) {
 };
 
 EnemyAction.knockStop = function(enemy, stopFrame) {
-	if(EnemyStatusManager.getEnemyStatus(enemy).superarmer) return;
+	var status = EnemyStatusManager.getEnemyStatus(enemy);
+	if(status.superarmor) return;
+	if(status.executingAttackTask) {
+		status.executingAttackTask.interrupt();
+	}
 
+	EnemyAction.stop(enemy, stopFrame);
+};
+
+EnemyAction.stop = function(enemy, stopFrame) {
 	var list = [];
 	var param = [];
 	param[0] = stopFrame;
@@ -120,17 +148,23 @@ EnemyAction.wakeUpEnemy = function(interpreter) {
 	EnemyStatusManager.initEnemy(enemy);
 };
 
+// TODO move EnemyAttack class rename doAttackTouchDamage
 EnemyAction.doEnemyAttack = function(interpreter) {
+	return EnemyAction.doAttackTouchDamage(interpreter);
+};
+
+// TODO move EnemyAttack class
+EnemyAction.doAttackTouchDamage = function(interpreter) {
 	// TODO evil. make ACTInputManager
 	if (Input._latestButton === "ok" && Input._pressedTime === 1) {
-		return;
+		return false;
 	}
 
 	var enemy = $gameMap.event(interpreter._eventId);
 
 	// judge touchdamage
 	var status = EnemyStatusManager.getEnemyStatus(enemy);
-	if(!status.touchdamage) return;
+	if(!status.touchdamage) return false;
 
 	var taskList = new FrameTaskList();
 
@@ -144,4 +178,97 @@ EnemyAction.doEnemyAttack = function(interpreter) {
 
 	FrameTaskExecuter.execTask(taskList);
 
+	return true;
+};
+
+// TODO move EnemyAttack class
+EnemyAction.doAttackSlash = function(enemy, attackDelay, attackProbability, superarmor) {
+	if(!attackDelay) attackDelay = 30;
+	if(!attackProbability) attackProbability = 50;
+	if(!superarmor) superarmor = false;
+
+	// roll dice
+	if(!EnemyAction._rollAttackDice(attackProbability)) return;
+
+	// judge start attack
+	var collisionRect = new CollisionRectangle(-1, 1, -2, 0);
+	EnemyAction._rotateCollisionRectangle(collisionRect, enemy);
+	if(!EnemyAttackColision.judgeCollision(enemy,collisionRect)){
+		return;
+	}
+
+	// attack
+	var status = EnemyStatusManager.getEnemyStatus(enemy);
+	var tasks = new FrameTaskList();
+	status.executingAttackTask = tasks;
+
+	tasks.addTask(function() {
+		status.superarmor = superarmor;					//start superarmor
+		EnemyAction.stop(enemy, attackDelay + 12 + 30);
+		enemy.requestAnimation(128);
+
+	}.bind(this))
+	.addWait(attackDelay)
+	.addTask(function() {
+		enemy.requestAnimation(EnemyAction._rotateAnimation(132, enemy));
+	}.bind(this))
+	.addWait(4)
+	.addTask(function(){
+		if(EnemyAttackColision.judgeCollision(enemy,collisionRect)){
+			$gamePlayer.requestAnimation(6);
+			PlayerStatusManager.processPlayerDamage(enemy);
+		}
+	}.bind(this))
+	.addWait(8)
+	.addTask(function(){
+		status.superarmor = status.superarmorOrg;				//end superarmor
+	}.bind(this))
+	.addWait(30)
+	.addTask(function(){
+		status.executingAttackTask = null;
+	}.bind(this))
+	;
+
+	FrameTaskExecuter.execTask(tasks);
+};
+
+EnemyAction._rollAttackDice = function(attackProbability) {
+	var attackDice = Math.floor(Math.random() * 100 + 1);
+	return attackProbability >= attackDice;
+};
+
+EnemyAction._rotateCollisionRectangle = function(topRectangle, enemy) {
+	var enemyDirection = EnemyAction._getEnemyDirection(enemy);
+
+	for (var i = 0; i < enemyDirection; i++) {
+		topRectangle.rotateLeft();
+	}
+};
+
+EnemyAction._rotateAnimation = function(topAnimationId, enemy) {
+	return topAnimationId + EnemyAction._getEnemyDirection(enemy);
+};
+
+EnemyAction._getEnemyDirection = function(enemy) {
+	var direction = -1;
+	switch (enemy._direction) {
+		case 8:
+			direction = 0;
+			break;
+		case 4:
+			direction = 1;
+			break;
+		case 2:
+			direction = 2;
+			break;
+		case 6:
+			direction = 3;
+			break;
+	}
+
+	if (direction == -1) {
+		throw new Error('invalid direction');
+	}
+
+	return direction;
 };

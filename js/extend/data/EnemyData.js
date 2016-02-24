@@ -13,13 +13,15 @@ EnemyData.enemyList = {
 		hp: 100,
 		atk: 40,
 		def: 30,
-		touchdamage:true,
+		superarmor:false,
+		touchdamage:false,
 	},
 	"slime": {
 		name: "slime",
 		hp: 50,
 		atk: 40,
 		def: 30,
+		superarmor:false,
 		touchdamage:true,
 	},
 	"minotaurus": {
@@ -27,7 +29,7 @@ EnemyData.enemyList = {
 		hp: 200,
 		atk: 60,
 		def: 30,
-		superarmer:true,
+		superarmor:true,
 		touchdamage:true,
 	},
 	"default": {

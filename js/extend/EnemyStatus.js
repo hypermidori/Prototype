@@ -80,6 +80,9 @@ function EnemyStatus(enemy) {
 	this.hp = enemyStatusOrigin.hp;
 	this.atk = enemyStatusOrigin.atk;
 	this.def = enemyStatusOrigin.def;
-	this.superarmer = enemyStatusOrigin.superarmer;
+	this.superarmor = enemyStatusOrigin.superarmor;
+	this.superarmorOrg = enemyStatusOrigin.superarmor;
 	this.touchdamage = enemyStatusOrigin.touchdamage;
+	this.touchdamageOrg = enemyStatusOrigin.touchdamage;
+	this.executingAttackTask = null;
 }
