@@ -238,20 +238,20 @@ PlayerAction._rotateAnimation = function(topAnimationId) {
 	return topAnimationId + PlayerAction._getPlayerDirection();
 };
 
-PlayerAction._blowOffEnemy = function(enemy, moveDistance) {
+PlayerAction._blowOffEnemy = function(enemy, moveDistance, stopFrame) {
 	var playerDirection = PlayerAction._getPlayerDirection();
 	switch (playerDirection) {
 		case PlayerAction.DIRECTION_TOP:
-			EnemyAction.blowOffTop(enemy, moveDistance);
+			EnemyAction.blowOffTop(enemy, moveDistance, stopFrame);
 			break;
 		case PlayerAction.DIRECTION_LEFT:
-			EnemyAction.blowOffLeft(enemy, moveDistance);
+			EnemyAction.blowOffLeft(enemy, moveDistance, stopFrame);
 			break;
 		case PlayerAction.DIRECTION_BOTTOM:
-			EnemyAction.blowOffBottom(enemy, moveDistance);
+			EnemyAction.blowOffBottom(enemy, moveDistance, stopFrame);
 			break;
 		case PlayerAction.DIRECTION_RIGHT:
-			EnemyAction.blowOffRight(enemy, moveDistance);
+			EnemyAction.blowOffRight(enemy, moveDistance, stopFrame);
 			break;
 	}
 

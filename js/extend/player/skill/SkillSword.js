@@ -52,7 +52,7 @@ SkillSword.normalAttack1 = function() {
 			hitEnemyList.forEach(function(enemy) {
 				PlayerAction.gainSp(3);
 				enemy.requestAnimation(1);
-				PlayerAction._blowOffEnemy(enemy, 1);
+				EnemyAction.knockStop(enemy, 10);
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
@@ -97,7 +97,7 @@ SkillSword.normalAttack2 = function() {
 			hitEnemyList.forEach(function(enemy) {
 				PlayerAction.gainSp(3);
 				enemy.requestAnimation(1);
-				PlayerAction._blowOffEnemy(enemy, 1);
+				PlayerAction._blowOffEnemy(enemy, 1, 10);
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 
@@ -144,7 +144,7 @@ SkillSword.normalAttack3 = function() {
 			hitEnemyList.forEach(function(enemy) {
 				PlayerAction.gainSp(3);
 				enemy.requestAnimation(1);
-				PlayerAction._blowOffEnemy(enemy, 1);
+				PlayerAction._blowOffEnemy(enemy, 1, 20);
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
@@ -190,8 +190,8 @@ SkillSword.normalAttack4 = function() {
 			hitEnemyList.forEach(function(enemy) {
 				PlayerAction.gainSp(3);
 				enemy.requestAnimation(1);
-				PlayerAction._blowOffEnemy(enemy, 1);
-				EnemyStatusManager.processEnemyDamange(enemy, 1);
+				PlayerAction._blowOffEnemy(enemy, 2, 20);
+				EnemyStatusManager.processEnemyDamange(enemy, 1.2);
 			}.bind(this));
 		})
 		.addWait(8)
@@ -278,7 +278,7 @@ SkillSword.powerAttack_1 = function() {
 
 			hitEnemyList.forEach(function(enemy) {
 				enemy.requestAnimation(126);
-				PlayerAction._blowOffEnemy(enemy, 3);
+				PlayerAction._blowOffEnemy(enemy, 3, 16);
 				EnemyStatusManager.processEnemyDamange(enemy, 2);
 			}.bind(this));
 		})
@@ -313,7 +313,7 @@ SkillSword.powerAttack_2 = function() {
 
 			hitEnemyList.forEach(function(enemy) {
 				enemy.requestAnimation(1);
-				PlayerAction._blowOffEnemy(enemy, 1);
+				PlayerAction._blowOffEnemy(enemy, 1, 10);
 				EnemyStatusManager.processEnemyDamange(enemy, 1.2);
 			}.bind(this));
 		})
@@ -386,7 +386,7 @@ SkillSword.powerAttack_3 = function() {
 
 			hitEnemyList.forEach(function(enemy) {
 				enemy.requestAnimation(126);
-				PlayerAction._blowOffEnemy(enemy, 2);
+				PlayerAction._blowOffEnemy(enemy, 2, 10);
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})

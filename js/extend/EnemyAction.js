@@ -6,7 +6,8 @@ function EnemyAction() {
 	throw new Error('This is a static class');
 }
 
-EnemyAction._makeBlowOffRouteList = function(enemy, moveDistance, route) {
+EnemyAction._makeBlowOffRouteList = function(enemy, moveDistance, route, stopFrame) {
+	if(!stopFrame) stopFrame = 0;
 	var originMoveSpeed = enemy._moveSpeed;
 
 	var list = [];
@@ -28,10 +29,17 @@ EnemyAction._makeBlowOffRouteList = function(enemy, moveDistance, route) {
 		"code": Game_Character.ROUTE_CHANGE_SPEED,
 		"parameters": [originMoveSpeed]
 	});
+	if(stopFrame){
+		list.push({
+			"code": Game_Character.ROUTE_WAIT,
+			"parameters": [stopFrame]
+		});
+	}
 	list.push({
 		"code": Game_Character.ROUTE_DIR_FIX_OFF,
 		"parameters": ""
 	});
+
 	list.push({
 		"code": Game_Character.ROUTE_END
 	});
@@ -39,14 +47,14 @@ EnemyAction._makeBlowOffRouteList = function(enemy, moveDistance, route) {
 	return list;
 };
 
-EnemyAction.blowOffTop = function(enemy, moveDistance) {
+EnemyAction.blowOffTop = function(enemy, moveDistance, stopFrame) {
 	var status = EnemyStatusManager.getEnemyStatus(enemy);
 	if(status.superarmor) return;
 	if(status.executingAttackTask) {
 		status.executingAttackTask.interrupt();
 	}
 
-	var list = EnemyAction._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_UP);
+	var list = EnemyAction._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_UP, stopFrame);
 
 	var enemyMoveRoute = {
 		"list": list,
@@ -57,14 +65,14 @@ EnemyAction.blowOffTop = function(enemy, moveDistance) {
 	enemy.forceMoveRoute(enemyMoveRoute);
 };
 
-EnemyAction.blowOffBottom = function(enemy, moveDistance) {
+EnemyAction.blowOffBottom = function(enemy, moveDistance, stopFrame) {
 	var status = EnemyStatusManager.getEnemyStatus(enemy);
 	if(status.superarmor) return;
 	if(status.executingAttackTask) {
 		status.executingAttackTask.interrupt();
 	}
 
-	var list = EnemyAction._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_DOWN);
+	var list = EnemyAction._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_DOWN, stopFrame);
 
 	var enemyMoveRoute = {
 		"list": list,
@@ -75,14 +83,14 @@ EnemyAction.blowOffBottom = function(enemy, moveDistance) {
 	enemy.forceMoveRoute(enemyMoveRoute);
 };
 
-EnemyAction.blowOffLeft = function(enemy, moveDistance) {
+EnemyAction.blowOffLeft = function(enemy, moveDistance, stopFrame) {
 	var status = EnemyStatusManager.getEnemyStatus(enemy);
 	if(status.superarmor) return;
 	if(status.executingAttackTask) {
 		status.executingAttackTask.interrupt();
 	}
 
-	var list = EnemyAction._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_LEFT);
+	var list = EnemyAction._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_LEFT, stopFrame);
 
 	var enemyMoveRoute = {
 		"list": list,
@@ -93,14 +101,14 @@ EnemyAction.blowOffLeft = function(enemy, moveDistance) {
 	enemy.forceMoveRoute(enemyMoveRoute);
 };
 
-EnemyAction.blowOffRight = function(enemy, moveDistance) {
+EnemyAction.blowOffRight = function(enemy, moveDistance, stopFrame) {
 	var status = EnemyStatusManager.getEnemyStatus(enemy);
 	if(status.superarmor) return;
 	if(status.executingAttackTask) {
 		status.executingAttackTask.interrupt();
 	}
 
-	var list = EnemyAction._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_RIGHT);
+	var list = EnemyAction._makeBlowOffRouteList(enemy, moveDistance, Game_Character.ROUTE_MOVE_RIGHT, stopFrame);
 
 	var enemyMoveRoute = {
 		"list": list,
@@ -148,7 +156,7 @@ EnemyAction.wakeUpEnemy = function(interpreter) {
 	EnemyStatusManager.initEnemy(enemy);
 };
 
-// TODO move EnemyAttack class rename doAttackTouchDamage
+// TODO delete
 EnemyAction.doEnemyAttack = function(interpreter) {
 	return EnemyAction.doAttackTouchDamage(interpreter);
 };
