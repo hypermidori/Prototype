@@ -22,7 +22,7 @@ EnemyData.enemyList = {
 		atk: 40,
 		def: 30,
 		superarmor:false,
-		touchdamage:true,
+		touchdamage:false,
 	},
 	"minotaurus": {
 		name: "minotaurus",
@@ -30,7 +30,7 @@ EnemyData.enemyList = {
 		atk: 60,
 		def: 30,
 		superarmor:true,
-		touchdamage:true,
+		touchdamage:false,
 	},
 	"default": {
 		name: "default",
