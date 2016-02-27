@@ -34,6 +34,8 @@ EnemyAttack.doAttackTouchDamage = function(interpreter) {
 	return true;
 };
 
+
+// TODO rename doAttackSlimeBubble
 EnemyAttack.doAttackBlow = function(enemy, attackDelay, attackProbability, superarmor) {
 	if(!attackDelay) attackDelay = 30;
 	if(!attackProbability) attackProbability = 50;
@@ -43,7 +45,7 @@ EnemyAttack.doAttackBlow = function(enemy, attackDelay, attackProbability, super
 	if(!EnemyAction._rollAttackDice(attackProbability)) return;
 
 	// judge start attack
-	var collisionRect = new CollisionRectangle(0, 0, -2, 0);
+	var collisionRect = new CollisionRectangle(-1, 1, -1, 1);
 	EnemyAction._rotateCollisionRectangle(collisionRect, enemy);
 	if(!EnemyAttackColision.judgeCollision(enemy,collisionRect)){
 		return;

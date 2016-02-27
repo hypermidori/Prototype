@@ -51,12 +51,14 @@ EnemyStatusManager.processEnemyDamange = function(enemy, rate) {
 
 EnemyStatusManager.destroyEnemy = function(enemy) {
 	var taskList = new FrameTaskList();
+	var status = EnemyStatusManager.getEnemyStatus(enemy);
 
 	taskList.addTask(function() {
 			enemy.requestAnimation(125);
 		}.bind(this))
 		.addWait(10)
 		.addTask(function() {
+			if(status.executingAttackTask) status.executingAttackTask.interrupt();		// stop zonbie attack
 			$gameSelfSwitches.setValue([$gameMap.mapId(), enemy.eventId(), "D"], true); // destroy flag
 			$gameMap.eraseEvent(enemy.eventId());		// TODO add not erase flag
 		}.bind(this));
