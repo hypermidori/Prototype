@@ -21,7 +21,7 @@ EnemyAttack.doAttackTouchDamage = function(interpreter) {
 	var taskList = new FrameTaskList();
 
 	taskList.addTask(function() {
-			$gamePlayer.requestAnimation(6);
+			$gamePlayer.requestAnimation(1);
 		}.bind(this))
 		.addWait(10)
 		.addTask(function() {
@@ -45,11 +45,14 @@ EnemyAttack.doAttackBlow = function(enemy, attackDelay, attackProbability, super
 	if(!EnemyAction._rollAttackDice(attackProbability)) return;
 
 	// judge start attack
-	var collisionRect = new CollisionRectangle(-1, 1, -1, 1);
-	EnemyAction._rotateCollisionRectangle(collisionRect, enemy);
-	if(!EnemyAttackColision.judgeCollision(enemy,collisionRect)){
+	var judgeCollisionRect = new CollisionRectangle(-2, 2, -2, 2);
+	EnemyAction._rotateCollisionRectangle(judgeCollisionRect, enemy);
+	if(!EnemyAttackColision.judgeCollision(enemy,judgeCollisionRect)){
 		return;
 	}
+
+	var attackCollisionRect = new CollisionRectangle(-1, 1, -1, 1);
+	EnemyAction._rotateCollisionRectangle(attackCollisionRect, enemy);
 
 	// attack
 	var status = EnemyStatusManager.getEnemyStatus(enemy);
@@ -69,7 +72,7 @@ EnemyAttack.doAttackBlow = function(enemy, attackDelay, attackProbability, super
 	}.bind(this))
 	.addWait(4)
 	.addTask(function(){
-		if(EnemyAttackColision.judgeCollision(enemy,collisionRect)){
+		if(EnemyAttackColision.judgeCollision(enemy,attackCollisionRect)){
 			$gamePlayer.requestAnimation(1);
 			PlayerStatusManager.processPlayerDamage(enemy);
 		}

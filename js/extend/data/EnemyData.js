@@ -24,6 +24,7 @@ EnemyData.enemyList = {
 		def: 30,
 		superarmor: false,
 		touchdamage: false,
+		routeFunc: EnemyMoveRoute.getSlimeMoveRoute,
 	},
 	"minotaurus": {
 		name: "minotaurus",
@@ -32,6 +33,7 @@ EnemyData.enemyList = {
 		def: 30,
 		superarmor: true,
 		touchdamage: false,
+		routeFunc: EnemyMoveRoute.getMinotaurusMoveRoute,
 	},
 	"default": {
 		name: "default",
