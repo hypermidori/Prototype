@@ -49,7 +49,6 @@ EnemyAction._makeBlowOffRouteList = function(enemy, moveDistance, route, stopFra
 
 EnemyAction.blowOffTop = function(enemy, moveDistance, stopFrame) {
 	var status = EnemyStatusManager.getEnemyStatus(enemy);
-	console.log(status);
 	if(status.superarmor) return;
 	if(status.executingAttackTask) {
 		status.executingAttackTask.interrupt();

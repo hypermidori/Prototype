@@ -154,6 +154,16 @@ PlayerAction.skill_3 = function() {
 	PlayerAction.skillMap.skill_3.func();
 };
 
+// DEBUG TODO Delete!!!!!!!!!!!!!!!!!!!!!
+Game_Character.prototype.processRouteEnd = function() {
+    if (this._moveRoute.repeat) {
+        this._moveRouteIndex = -1;
+    } else if (this._moveRouteForcing) {
+        this._moveRouteForcing = false;
+        this.restoreMoveRoute();
+    }
+};
+
 PlayerAction.step = function() {
 	if (PlayerAction.isStopping) {
 		if (!PlayerAction.isCancelable) {
@@ -165,6 +175,7 @@ PlayerAction.step = function() {
 	}
 	PlayerAction.prepareAttack();
 
+	PlayerAction.setStopping(true);
 	PlayerAction.setCancelLevel(1);
 	var moveDirection = 0;
 	if (ActionPartInput.isPressed(ActionPartInput.KEY_UP)) moveDirection = Game_Character.ROUTE_MOVE_UP;
@@ -174,7 +185,6 @@ PlayerAction.step = function() {
 
 	var tasks = new FrameTaskList();
 	tasks.addTask(function() {
-			PlayerAction.setStopping(true);
 			PlayerAction.stepMove(moveDirection);
 		}.bind(this))
 		.addWait(15)
@@ -267,13 +277,11 @@ PlayerAction.stepMove = function(moveDirection, moveNum, stopFrame, moveSpeed) {
 
 	list.push({
 		"code": Game_Character.ROUTE_DIR_FIX_ON,
-		"parameters": ""
 	});
 	list.push({
 		"code": Game_Character.ROUTE_CHANGE_SPEED,
 		"parameters": [moveSpeed]
 	});
-
 	for (var i = 0; i < moveNum; i++) {
 		list.push({
 			"code": moveDirection,
@@ -294,7 +302,8 @@ PlayerAction.stepMove = function(moveDirection, moveNum, stopFrame, moveSpeed) {
 
 	var moveRoute = {
 		"list": list,
-		"repeat": false,
+//		"repeat": false,
+		"repeat": true,			// fix step bug. this code is evil magic. but cannot escape
 		"skippable": true,
 		"wait": true
 	};
@@ -408,7 +417,6 @@ PlayerAction.moveReset = function() {
 	});
 	list.push({
 		"code": Game_Character.ROUTE_DIR_FIX_OFF,
-		"parameters": ""
 	});
 	list.push({
 		"code": Game_Character.ROUTE_END

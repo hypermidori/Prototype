@@ -27,12 +27,6 @@ EnemyStatusManager.initEnemy = function(enemy) {
 
 EnemyStatusManager.getEnemyStatus = function(enemy) {
 	var status = EnemyStatusManager._list[enemy._eventId];
-	// if (!status) {
-	// 	var newStatus = new EnemyStatus(enemy);
-	// 	EnemyStatusManager._list[enemy._eventId] = newStatus;
-	//
-	// 	status = newStatus;
-	// }
 
 	return status;
 };
@@ -87,4 +81,22 @@ function EnemyStatus(enemy) {
 	this.touchdamage = enemyStatusOrigin.touchdamage;
 	this.touchdamageOrg = enemyStatusOrigin.touchdamage;
 	this.executingAttackTask = null;
+	this.routeFunc = enemyStatusOrigin.routeFunc;
+
+	this.setEnemyEventMoveRoute(enemy);
 }
+
+EnemyStatus.prototype.setEnemyEventMoveRoute = function(enemy){
+	if(!this.routeFunc) return;
+	var route = this.routeFunc();
+
+
+	var tasks = new FrameTaskList();
+	tasks.addWait(1)				// wait Event page change
+	.addTask(function() {
+		enemy._moveType = 3;					// moveTypeCustom
+		enemy.setMoveRoute(route);
+	});
+
+	FrameTaskExecuter.execTask(tasks);
+};
