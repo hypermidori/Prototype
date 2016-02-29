@@ -98,6 +98,5 @@ EnemyMoveRoute.getMinotaurusMoveRoute = function() {
 		"wait": true
 	};
 
-	console.log("getgetMinotaurusMoveRoute")
 	return route;
 };
