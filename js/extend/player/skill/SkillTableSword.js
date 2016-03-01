@@ -37,7 +37,7 @@ SkillTableSword.get = function(key) {
 				normal: {sp:0, func:SkillSword.normalAttack},
 				skill_1: {sp:20, func:SkillSword.powerAttack_3},
 				skill_2: {sp:15, func:SkillSword.powerAttack_2},
-				skill_3: {sp:40, func:SkillSword.powerAttack_4},
+				skill_3: {sp:0, func:SkillSword.powerAttack_5},
 			};
 		break;
 

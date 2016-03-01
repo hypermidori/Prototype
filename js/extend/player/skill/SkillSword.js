@@ -394,7 +394,7 @@ SkillSword.powerAttack_3 = function() {
 
 			hitEnemyList.forEach(function(enemy) {
 				enemy.requestAnimation(126);
-				PlayerAction._blowOffEnemy(enemy, 2, 10);
+				PlayerAction._blowOffEnemy(enemy, 2, 30);
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
@@ -427,7 +427,7 @@ SkillSword.powerAttack_4 = function() {
 		})
 		.addWait(20)
 		.addTask(function() {
-			$gamePlayer.requestAnimation(161);		// 44 frame
+			$gamePlayer.requestAnimation(160);		// 44 frame
 			PlayerWeaponPictureManager.setFileId(7);
 
 			$enemyEventCollision.updateEnemyEventList();
@@ -485,6 +485,86 @@ SkillSword.powerAttack_4 = function() {
 			hitEnemyList.forEach(function(enemy) {
 				enemy.requestAnimation(126);
 				PlayerAction._blowOffEnemy(enemy, 2, 10);
+				EnemyStatusManager.processEnemyDamange(enemy, 1);
+			}.bind(this));
+		})
+		.addWait(6)
+		.addTask(function() {
+			PlayerAction.setCancelable(true);
+		})
+		.addWait(6)
+		.addTask(function() {
+			PlayerAction.reset();
+		});
+
+	PlayerAction.setExecutingAttackTask(tasks);
+	FrameTaskExecuter.execTask(tasks);
+};
+
+SkillSword.powerAttack_5 = function() {
+	var tasks = new FrameTaskList();
+	var collisionRect = new CollisionRectangle(0, 0, -3, 0);
+	PlayerAction._rotateCollisionRectangle(collisionRect);
+	PlayerAction.setCancelLevel(0);
+	PlayerAction.setNormalAttackNum(0);
+
+	tasks.addTask(function() {
+			PlayerAction.knockStop(9999);
+			PlayerAction.setStopping(true);
+			PlayerWeaponPictureManager.setFileId(8);
+			PlayerWeaponPictureManager.startDisp();
+			$gamePlayer.requestAnimation(165);		// 20 frame
+		})
+		.addWait(20)
+		.addTask(function() {
+			$gamePlayer.requestAnimation(PlayerAction._rotateAnimation(161));		// 20 frame
+			PlayerWeaponPictureManager.setFileId(9);
+
+			$enemyEventCollision.updateEnemyEventList();
+			var hitEnemyList = $enemyEventCollision.judgeCollision(collisionRect);
+			hitEnemyList.forEach(function(enemy) {
+				enemy.requestAnimation(126);
+				EnemyAction.knockStop(enemy, 10);
+				EnemyStatusManager.processEnemyDamange(enemy, 1);
+			}.bind(this));
+		})
+		.addWait(3)
+		.addTask(function() {
+			$enemyEventCollision.updateEnemyEventList();
+			var hitEnemyList = $enemyEventCollision.judgeCollision(collisionRect);
+			hitEnemyList.forEach(function(enemy) {
+				enemy.requestAnimation(126);
+				EnemyAction.knockStop(enemy, 10);
+				EnemyStatusManager.processEnemyDamange(enemy, 1);
+			}.bind(this));
+		})
+		.addWait(3)
+		.addTask(function() {
+			$enemyEventCollision.updateEnemyEventList();
+			var hitEnemyList = $enemyEventCollision.judgeCollision(collisionRect);
+			hitEnemyList.forEach(function(enemy) {
+				enemy.requestAnimation(126);
+				EnemyAction.knockStop(enemy, 10);
+				EnemyStatusManager.processEnemyDamange(enemy, 1);
+			}.bind(this));
+		})
+		.addWait(3)
+		.addTask(function() {
+			$enemyEventCollision.updateEnemyEventList();
+			var hitEnemyList = $enemyEventCollision.judgeCollision(collisionRect);
+			hitEnemyList.forEach(function(enemy) {
+				enemy.requestAnimation(126);
+				EnemyAction.knockStop(enemy, 10);
+				EnemyStatusManager.processEnemyDamange(enemy, 1);
+			}.bind(this));
+		})
+		.addWait(3)
+		.addTask(function() {
+			$enemyEventCollision.updateEnemyEventList();
+			var hitEnemyList = $enemyEventCollision.judgeCollision(collisionRect);
+			hitEnemyList.forEach(function(enemy) {
+				enemy.requestAnimation(126);
+				PlayerAction._blowOffEnemy(enemy, 2, 20);
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
