@@ -92,7 +92,7 @@ PlayerAction.normalAttack = function() {
 			return;
 		}
 	}
-
+	PlayerAction._rotateBeforeAttack();
 	PlayerAction.prepareAttack();
 	PlayerAction.skillMap.normal.func();
 };
@@ -112,6 +112,7 @@ PlayerAction.skill_1 = function() {
 	}
 	PlayerAction.reduceSp(PlayerAction.skillMap.skill_1.sp);
 
+	PlayerAction._rotateBeforeAttack();
 	PlayerAction.prepareAttack();
 	PlayerAction.skillMap.skill_1.func();
 };
@@ -131,6 +132,7 @@ PlayerAction.skill_2 = function() {
 	}
 	PlayerAction.reduceSp(PlayerAction.skillMap.skill_2.sp);
 
+	PlayerAction._rotateBeforeAttack();
 	PlayerAction.prepareAttack();
 	PlayerAction.skillMap.skill_2.func();
 };
@@ -150,18 +152,9 @@ PlayerAction.skill_3 = function() {
 	}
 	PlayerAction.reduceSp(PlayerAction.skillMap.skill_3.sp);
 
+	PlayerAction._rotateBeforeAttack();
 	PlayerAction.prepareAttack();
 	PlayerAction.skillMap.skill_3.func();
-};
-
-// DEBUG TODO Delete!!!!!!!!!!!!!!!!!!!!!
-Game_Character.prototype.processRouteEnd = function() {
-    if (this._moveRoute.repeat) {
-        this._moveRouteIndex = -1;
-    } else if (this._moveRouteForcing) {
-        this._moveRouteForcing = false;
-        this.restoreMoveRoute();
-    }
 };
 
 PlayerAction.step = function() {
@@ -212,9 +205,24 @@ PlayerAction.reduceSp = function(reduceSp) {
 	PlayerStatusManager.getPlayerStatus().reduceSp(reduceSp);
 };
 
+PlayerAction._rotateBeforeAttack = function() {
+	if(ActionPartInput.isPressed(ActionPartInput.KEY_UP)){
+		$gamePlayer.setDirection(8);
+	}
+	if(ActionPartInput.isPressed(ActionPartInput.KEY_DOWN)){
+		$gamePlayer.setDirection(2);
+	}
+	if(ActionPartInput.isPressed(ActionPartInput.KEY_LEFT)){
+		$gamePlayer.setDirection(4);
+	}
+	if(ActionPartInput.isPressed(ActionPartInput.KEY_RIGHT)){
+		$gamePlayer.setDirection(6);
+	}
+};
+
 PlayerAction._getPlayerDirection = function() {
 	var direction = -1;
-	switch ($gamePlayer._direction) {
+	switch ($gamePlayer.direction()) {
 		case 8:
 			direction = PlayerAction.DIRECTION_TOP;
 			break;

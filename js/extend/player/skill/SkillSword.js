@@ -31,12 +31,14 @@ SkillSword.normalAttack1 = function() {
 	PlayerAction.setNormalAttackNum(1);
 
 	tasks.addTask(function() {
-			$gamePlayer.requestAnimation(PlayerAction._rotateAnimation(132));
-			PlayerAction.knockStop(9999);
-			PlayerAction.setStopping(true);
-
 			PlayerWeaponPictureManager.setFileId(0);
 			PlayerWeaponPictureManager.startDisp();
+			PlayerAction.knockStop(9999);
+			PlayerAction.setStopping(true);
+		})
+		.addWait(2)
+		.addTask(function() {
+				$gamePlayer.requestAnimation(PlayerAction._rotateAnimation(132));
 		})
 		.addWait(3)
 		.addTask(function() {
@@ -77,12 +79,14 @@ SkillSword.normalAttack2 = function() {
 	PlayerAction.setNormalAttackNum(2);
 
 	tasks.addTask(function() {
-			$gamePlayer.requestAnimation(PlayerAction._rotateAnimation(136));
 			PlayerAction.knockStop(9999);
 			PlayerAction.setStopping(true);
-
 			PlayerWeaponPictureManager.setFileId(0);
 			PlayerWeaponPictureManager.startDisp();
+		})
+		.addWait(1)
+		.addTask(function() {
+			$gamePlayer.requestAnimation(PlayerAction._rotateAnimation(136));
 		})
 		.addWait(3)
 		.addTask(function() {
@@ -123,12 +127,14 @@ SkillSword.normalAttack3 = function() {
 	PlayerAction.setNormalAttackNum(3);
 
 	tasks.addTask(function() {
-			$gamePlayer.requestAnimation(PlayerAction._rotateAnimation(140));
 			PlayerAction.forwardAndStop(1, 9999, 5);
 			PlayerAction.setStopping(true);
-
 			PlayerWeaponPictureManager.setFileId(3);
 			PlayerWeaponPictureManager.startDisp();
+		})
+		.addWait(1)
+		.addTask(function() {
+			$gamePlayer.requestAnimation(PlayerAction._rotateAnimation(140));
 		})
 		.addWait(3)
 		.addTask(function() {
@@ -169,12 +175,14 @@ SkillSword.normalAttack4 = function() {
 	PlayerAction.setNormalAttackNum(0); // end
 
 	tasks.addTask(function() {
-			$gamePlayer.requestAnimation(PlayerAction._rotateAnimation(144));
 			PlayerAction.forwardAndStop(1, 9999, 5);
 			PlayerAction.setStopping(true);
-
 			PlayerWeaponPictureManager.setFileId(3);
 			PlayerWeaponPictureManager.startDisp();
+		})
+		.addWait(1)
+		.addTask(function() {
+			$gamePlayer.requestAnimation(PlayerAction._rotateAnimation(144));
 		})
 		.addWait(3)
 		.addTask(function() {
@@ -335,7 +343,7 @@ SkillSword.powerAttack_3 = function() {
 	var collisionRect = new CollisionRectangle(-1, 1, -3, 0);
 	PlayerAction._rotateCollisionRectangle(collisionRect);
 	PlayerAction.setCancelLevel(0);
-	PlayerAction.setNormalAttackNum(0); // end
+	PlayerAction.setNormalAttackNum(0);
 
 	tasks.addTask(function() {
 			PlayerAction.knockStop(9999);
@@ -408,7 +416,7 @@ SkillSword.powerAttack_4 = function() {
 	var collisionRect = new CollisionRectangle(-2, 2, -2, 2);
 	PlayerAction._rotateCollisionRectangle(collisionRect);
 	PlayerAction.setCancelLevel(0);
-	PlayerAction.setNormalAttackNum(1);
+	PlayerAction.setNormalAttackNum(0);
 
 	tasks.addTask(function() {
 			PlayerAction.knockStop(9999);
@@ -430,7 +438,7 @@ SkillSword.powerAttack_4 = function() {
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
-		.addWait(4)
+		.addWait(5)
 		.addTask(function() {
 			$enemyEventCollision.updateEnemyEventList();
 			var hitEnemyList = $enemyEventCollision.judgeCollision(collisionRect);
@@ -440,7 +448,7 @@ SkillSword.powerAttack_4 = function() {
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
-		.addWait(4)
+		.addWait(5)
 		.addTask(function() {
 			$enemyEventCollision.updateEnemyEventList();
 			var hitEnemyList = $enemyEventCollision.judgeCollision(collisionRect);
@@ -450,7 +458,7 @@ SkillSword.powerAttack_4 = function() {
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
-		.addWait(4)
+		.addWait(5)
 		.addTask(function() {
 			$enemyEventCollision.updateEnemyEventList();
 			var hitEnemyList = $enemyEventCollision.judgeCollision(collisionRect);
@@ -460,7 +468,7 @@ SkillSword.powerAttack_4 = function() {
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
-		.addWait(4)
+		.addWait(5)
 		.addTask(function() {
 			$enemyEventCollision.updateEnemyEventList();
 			var hitEnemyList = $enemyEventCollision.judgeCollision(collisionRect);
@@ -470,7 +478,7 @@ SkillSword.powerAttack_4 = function() {
 				EnemyStatusManager.processEnemyDamange(enemy, 1);
 			}.bind(this));
 		})
-		.addWait(4)
+		.addWait(5)
 		.addTask(function() {
 			$enemyEventCollision.updateEnemyEventList();
 			var hitEnemyList = $enemyEventCollision.judgeCollision(collisionRect);
