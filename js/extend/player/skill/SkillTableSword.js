@@ -35,9 +35,9 @@ SkillTableSword.get = function(key) {
 			table = {
 				weaponPicturePrefix:"sword/sword1/sword1_",
 				normal: {sp:0, func:SkillSword.normalAttack},
-				skill_1: {sp:20, func:SkillSword.powerAttack_3},
+				skill_1: {sp:20, func:SkillSword.powerAttack_5},
 				skill_2: {sp:15, func:SkillSword.powerAttack_2},
-				skill_3: {sp:0, func:SkillSword.powerAttack_5},
+				skill_3: {sp:0, func:SkillSword.powerAttack_6},
 			};
 		break;
 
